@@ -372,7 +372,7 @@ nav.widget_categories ul span#more{display:inline-table;position:absolute;right:
 .post{margin:0px;padding:0;width:100%;box-sizing:border-box;word-wrap:break-word !important;display:inline-block;background-color:rgba(255, 255, 255, 0.85098)}
 }
 @media screen and (min-width:720px){
-#primary .sidebar-left .widget.widget_entries {float: left;width: 50%;}
+#primary .sidebar-left .double{float:left;width:50%}
 #primary .sidebar-right .entry-content li{width:33%}
 #primary .sidebar-right{float:right;width:30%}
 #primary .sidebar-left{clear:both;width:70%;display:inline-block;padding-right:15px;padding-bottom:10px;min-height:330px}
