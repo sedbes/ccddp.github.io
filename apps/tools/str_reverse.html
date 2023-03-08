@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>在线文本反转_在线字符串反转_实时逆序字符串文本_Wum工具箱</title>
+<meta name="keywords" content="在线文本反转,在线字符串反转,实时逆序字符串文本" />
+<meta name="description" content="在线文本反转，在线字符串反转, 实时逆序字符串文本" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" user-scalable="no">
+<link rel="stylesheet" href="../static/style.css" type="text/css" media="all" />
+<link rel="stylesheet" href="../assets/encode/main.css">
+<script type="text/javascript" src="../static/js/jquery/jquery-2.1.4.min.js"></script>
+<script>
+$(function() {
+	 $("#inputstr").keyup(function(){
+          //$("#outputstr").val($(this).val());
+         var str = $(this).val();
+         var strlen = str.length-1;
+         var strreverse = "";
+         for (i = 0; i <= strlen; i ++)
+         {
+       		strreverse = strreverse + str.substr(strlen-i, 1);
+         }
+         $("#outputstr").val(strreverse);
+	});         
+				
+	$('textarea').each(function(index, element) {
+		var $element = $(element);
+		var defaultValue = $element.val();
+		$element.focus(function() {
+			var actualValue = $element.val();
+			if (actualValue == defaultValue) {
+				$element.val('');
+			}
+		});
+		$element.blur(function() {
+			var actualValue = $element.val();
+			if (!actualValue) {
+				$element.val(defaultValue);
+			}
+		});
+	});
+});
+</script>
+</head>
+<body>
+<div id="site-container" class="clearfix">
+  <div id="primary" class="clearfix">
+    <div class="container">
+  <div class="strleft">
+    <h1>在线文本反转，在线字符串逆序</h1>
+    <div class="insertSection">
+      <p>输入文本信息:</p>
+      <textarea rows="10" id="inputstr" name="InputString" >Welcome to here!</textarea>
+    </div>
+    <div class="outputSection">
+      <p>文本字符串的逆序:</p>
+      <textarea rows="10" id="outputstr" name="OutString" readonly="readonly" >!ereh ot emocleW</textarea>
+    </div>
+  </div>
+</div>
+</div>
+
+<footer id="site-footer" class="clearfix simple">
+<div class="container clearfix" id="live-search"></div>
+<div class="copyright">
+<p>投诉，收购：sedp&#x40;qq.com </p>
+<p>本站若未声明原创，则内容来源自互联网。您可用作非盈利目的，但请保留出处。若内容有冒犯您的权利，请来信告知，站长在约3日内删除。</p>
+
+</div>
+</footer>
+</div>
+<script type="text/javascript" src="../static/main.js"></script>
+</body>
+</html>

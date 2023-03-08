@@ -1,0 +1,52 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<style type="text/css">
+		body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"Microsoft YaHei",SimSun;}
+		#r-result{width:100%; font-size:14px;}
+	</style>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=244f9591ed2314c9f4a28748b5dbee96"></script>
+	<title>百度地图定位_便民工具_Wum工具箱</title>
+</head>
+<body>
+	<div id="allmap"></div>
+<script type="text/javascript">
+	var lng = getQueryString('lng');
+	var lat = getQueryString('lat');
+	if ( lng == null || lat == null || lng == undefined || lat == undefined ) {
+		// 百度地图API功能
+		var map = new BMap.Map("allmap");
+		map.centerAndZoom(new BMap.Point(116.331398,39.897445),12);
+		var geolocation = new BMap.Geolocation();
+		geolocation.getCurrentPosition(function(r){
+			if(this.getStatus() == BMAP_STATUS_SUCCESS){
+				var mk = new BMap.Marker(r.point);
+				map.addOverlay(mk);
+				map.panTo(r.point);
+				alert('您的位置：'+r.point.lng+','+r.point.lat);
+			}
+			else {
+				alert('failed'+this.getStatus());
+			}        
+		},{enableHighAccuracy: true})
+	} else {
+		// 百度地图API功能
+		var map = new BMap.Map("allmap");
+		var point = new BMap.Point(lng,lat);
+		map.centerAndZoom(point,17);
+		map.enableScrollWheelZoom(true);
+	}
+	function getQueryString(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+		var r = window.location.search.substr(1).match(reg);
+		if (r != null){
+			return unescape(r[2]);
+		}
+		return null;
+	}
+</script>
+
+<script type="text/javascript" src="../static/main.js"></script>
+</body>
+</html>

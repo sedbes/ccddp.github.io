@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>常用单位换算_便民工具_Wum工具箱</title>
+<meta name="description" content=" 包括长度，面积，温度，功率，热量，重量，压力，体积等常用单位的换算。在每个页面，相应的项目输入数值，点击右边的换算，即可显示所有的常用单位数值" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" user-scalable="no">
+<link rel="stylesheet" href="../static/style.css" type="text/css" media="all" />
+<link rel="stylesheet" href="../assets/encode/main.css">
+<script type="text/javascript" src="../static/js/jquery/jquery-1.9.1.min.js"></script>
+<style>
+.clearfix.footer {margin-top:500px !important;}
+</style>
+</head>
+<body>
+<div id="site-container" class="clearfix">
+    <div style="width:800px;text-align:center;margin:0 auto">
+<link rel="stylesheet" href="../assets/encode/danwei.css">
+<script src="../assets/encode/danwei.js"></script>
+<div class="page_header">
+<h1>常用单位换算</h1>
+</div>
+<div class="tabs_left">
+<ul class="tabs_nav">
+<li class="active"><a href="#A">长度</a></li>
+<li><a href="#B">面积</a></li>
+<li><a href="#C">温度</a></li>
+<li><a href="#D">功率</a></li>
+<li><a href="#E">热量</a></li>
+<li><a href="#F">重量</a></li>
+<li><a href="#G">压力</a></li>
+<li><a href="#H">体积</a></li>
+</ul>
+<div class="tab_content">
+<div class="tab_pane" id="A">
+<script type="text/javascript">
+echo(l_a_count, l_a, 'l', '长度');
+</script>
+</div>
+<div class="tab_pane" id="B">
+<script type="text/javascript">
+echo(m_a_count, m_a, 'm', '面积');
+</script>
+</div>
+<div class="tab_pane" id="C">
+<script type="text/javascript">
+echo(w_a_count, w_a, 'w', '温度');
+</script>
+</div>
+<div class="tab_pane" id="D">
+<script type="text/javascript">
+echo(g_a_count, g_a, 'g', '功率');
+</script>
+</div>
+<div class="tab_pane" id="E">
+<script type="text/javascript">
+echo(r_a_count, r_a, 'r', '热量');
+</script>
+</div>
+<div class="tab_pane" id="F">
+<script type="text/javascript">
+echo(z_a_count, z_a, 'z', '重量');
+</script>
+</div>
+<div class="tab_pane" id="G">
+<script type="text/javascript">
+echo(y_a_count, y_a, 'y', '压力');
+</script>
+</div>
+<div class="tab_pane" id="H">
+<script type="text/javascript">
+echo(t_a_count, t_a, 't', '体积');
+</script>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+$(function() {
+$(".menu").click(function() {
+$("#appList").slideToggle(300);
+});
+$(".tabs_nav li").click(function(e) {
+try {
+$(".tabs_nav li").removeClass("active");
+$(".tab_content .tab_pane").hide();
+var link = $(this).find("a").attr('href');
+$(this).addClass("active");
+$(link).show();
+e.preventDefault();
+} catch (e) {}
+});
+$("#A").show();
+});
+</script>
+</div>
+<div class="clearfix footer">
+    <footer id="site-footer" class="clearfix simple">
+        <div class="container clearfix" id="live-search"></div>
+        <div class="copyright">
+            <p>投诉，收购：sedp&#x40;qq.com </p>
+            <p>本站若未声明原创，则内容来源自互联网。您可用作非盈利目的，但请保留出处。若内容有冒犯您的权利，请来信告知，站长在约3日内删除。</p>
+            
+        </div>
+    </footer>
+</div>
+
+<script type="text/javascript" src="../static/main.js"></script>
+</body>
+</html>

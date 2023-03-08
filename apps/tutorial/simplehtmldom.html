@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>PHP Simple HTML DOM Parser: 中文手册</title>
+<meta name="description" content="PHP模拟jQuery读取html dom文档，php解析html类库simple_html_dom，PHP爬虫抓取网页内容 (simple_html_dom.php)"/>
+<link rel="stylesheet" href="../assets/simplehtmldom/css/default.css" type="text/css">
+<link rel="stylesheet" href="../assets/simplehtmldom/css/ui.tabs.css" type="text/css" media="print, projection, screen">
+<!-- <script type="text/javascript" src="../assets/simplehtmldom/js/jquery-1.2.3.pack.js"></script> -->
+<script type="text/javascript" src="../static/js/jquery.min.js"></script>
+<script type="text/javascript" src="../assets/simplehtmldom/js/ui.tabs.pack.js"></script>
+<script language="JavaScript" type="text/JavaScript">
+$(document).ready(function(){
+$(function() {$('#container_quickstart > ul').tabs();});
+$(function() {$('#container_create > ul').tabs();});
+$(function() {$('#container_find > ul').tabs();});
+$(function() {$('#container_access > ul').tabs();});
+$(function() {$('#container_traverse > ul').tabs();});
+$(function() {$('#container_dump > ul').tabs();});
+$(function() {$('#container_callback > ul').tabs();});
+});
+</script>
+</head>
+<body>
+<h1><a name="top"></a>PHP Simple HTML DOM Parser 中文手册</h1>
+<div id="content">
+<h2>目录</h2>
+<ul>
+<li><a href="#section_quickstart">快速入门</a></li>
+<li><a href="#section_create">怎么创建HTML DOM对象?</a></li>
+<li><a href="#section_find">怎么查找DOM元素？</a></li>
+<li><a href="#section_access">怎么获取DOM元素属性?</a> </li>
+<li><a href="#section_traverse">快捷的链式操作（ps：类似jq）</a></li>
+<li><a href="#section_dump">怎么dump查看一个DOM对象内部结构?</a></li>
+<li><a href="#section_callback">怎么自定义自己的解析方法来解析DOM元素?</a></li>
+<li><a href="manual_api.htm">API 参考</a></li>
+<li><a href="manual_faq.htm">相关问答</a></li>
+</ul>
+<a name="section_quickstart"></a>
+<h2>快速入门</h2>
+<a class="top" href="#top">回顶部</a>
+<div id="container_quickstart">
+<ul>
+<li><a href="#fragment-11"><span>查找HTML DOM元素</span></a></li>
+<li><a href="#fragment-12"><span>修改HTML DOM元素</span></a></li>
+<li><a href="#fragment-13"><span>提取HTML文本内容</span></a></li>
+<li><a href="#fragment-14"><span>抓取文章示例</span></a></li>
+</ul>
+<div id="fragment-11">
+<div class="code">
+<span class="comment">// 从一个URL或者一个文件的内容创建DOM</span><br>
+$html = <strong>file_get_html</strong>(<span class="var">'http://www.oschina.net/'</span>);<br>
+$html = <strong>file_get_html</strong>(<span class="var">'demo.html/'</span>);<br>
+<br>
+<span class="comment">//获取所有的img元素 </span><br>
+foreach($html-&gt;<strong>find</strong>(<span class="var">'img'</span>) as $element) <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo $element-&gt;<strong>src</strong> . <span class="var">'&lt;br&gt;'</span>;<br>
+<br>
+<span class="comment">// 获取所有的a链接 </span><br>
+foreach($html-&gt;<strong>find</strong>(<span class="var">'a'</span>) as $element) <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo $element-&gt;<strong>href</strong> . <span class="var">'&lt;br&gt;'</span>;      </div>
+</div>
+<div id="fragment-12">
+<div class="code">
+<span class="comment">//解析HTML字符串为DOM </span><br>
+$html = <strong>str_get_html</strong>(<span class="var">'&lt;div id=&quot;hello&quot;&gt;Hello&lt;/div&gt;&lt;div id=&quot;world&quot;&gt;World&lt;/div&gt;'</span>);<span class="comment"><br>
+<br>
+</span>
+$html-&gt;<strong>find</strong>(<span class="var">'div', 1</span>)-&gt;<strong>class</strong> = <span class="var">'bar'</span>;<br>
+<br>
+$html-&gt;<strong>find</strong>(<span class="var">'div[id=hello]', 0</span>)-&gt;<strong>innertext</strong> = <span class="var">'foo'</span>;<br>
+<br>
+echo $html; <span class="comment">// 输出: &lt;div id=&quot;hello&quot;&gt;<strong>foo</strong>&lt;/div&gt;&lt;div id=&quot;world&quot; <strong>class=&quot;bar&quot;</strong>&gt;World&lt;/div&gt;</span> </div>
+</div>
+<div id="fragment-13">
+<div class="code"><br>
+<span class="comment">//获取HTML中的纯文本（不包含标签）。ps：类似jq的$.text()方法。</span><br>
+echo <strong>file_get_html</strong>(<span class="var">'http://www.oschina.net/'</span>)-&gt;<strong>plaintext</strong>;
+<br>
+<br>
+</div>
+</div>
+<div id="fragment-14">
+<div class="code">
+<span class="comment">// 解析URL内容为DOM</span><br>
+$html = <strong>file_get_html</strong>(<span class="var">'http://slashdot.org/'</span>);<br>
+<br>
+<span class="comment">//遍历所有的文章块元素</span><br>
+foreach($html-&gt;<strong>find</strong>(<span class="var">'div.article'</span>) as $article) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$item[<span class="var">'title'</span>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= $article-&gt;<strong>find</strong>(<span class="var">'div.title'</span>, <span class="var">0</span>)-&gt;<strong>plaintext</strong>;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$item[<span class="var">'intro'</span>]&nbsp;&nbsp;&nbsp;&nbsp;= $article-&gt;<strong>find</strong>(<span class="var">'div.intro'</span>, <span class="var">0</span>)-&gt;<strong>plaintext</strong>;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$item[<span class="var">'details'</span>]&nbsp;= $article-&gt;<strong>find</strong>(<span class="var">'div.details'</span>, <span class="var">0</span>)-&gt;<strong>plaintext</strong>;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$articles[] = $item;<br>
+}<br>
+<br>
+print_r($articles);
+</div>
+</div>
+</div>
+<a name="section_create"></a>
+<h2>怎么创建HTML DOM对象?</h2>
+<a class="top" href="#top">回顶部</a>
+<div id="container_create">
+<ul>
+<li><a href="#frag_create_quick"><span>快速的方式</span></a></li>
+<li><a href="#frag_create_oo"><span>面向对象的方式</span></a></li>
+</ul>
+<div id="frag_create_quick">
+<div class="code"><span class="comment">// 解析HTML字符串为DOM对象</span><br>
+$html = <strong>str_get_html</strong>(<span class="var">'&lt;html&gt;&lt;body&gt;Hello!&lt;/body&gt;&lt;/html&gt;'</span>);<br>
+<br>
+<span class="comment">// 解析URL内容为DOM对象</span><br>
+$html = <strong>file_get_html</strong>(<span class="var">'http://www.oschina.net/'</span>);<br>
+<br>
+<span class="comment">// 解析HTML文件为DOM对象</span><br>
+$html = <strong>file_get_html</strong>(<span class="var">'test.htm'</span>);<span class="comment"><br>
+</span></div>
+</div>
+<div id="frag_create_oo">
+<div class="code"><span class="comment">// 创建一个DOM对象</span><br>
+$html = new <strong>simple_html_dom</strong>();<br>
+<br>
+<span class="comment">// 载入html字符串</span><br>
+$html-&gt;<strong>load</strong>(<span class="var">'&lt;html&gt;&lt;body&gt;Hello!&lt;/body&gt;&lt;/html&gt;'</span>);<br>
+<br>
+<span class="comment">// 载入URL内容 </span> <br>
+$html-&gt;<strong>load_file</strong>(<span class="var">'http://www.oschina.net'</span>);<br>
+<br>
+<span class="comment">// 载入一个HTML文件内容</span> <br>
+$html-&gt;<strong>load_file</strong>(<span class="var">'test.htm'</span>);</div>
+</div>
+</div>
+<a name="section_find"></a>
+<h2>怎么查找元素?</h2>
+<a class="top" href="#top">回顶部</a>
+<div id="container_find">
+<ul>
+<li><a href="#frag_find_basic"><span>基础查找</span></a></li>
+<li><a href="#frag_find_advanced"><span>高级查找 (ps:使用的css3选择器)</span></a></li>
+<li><a href="#frag_find_chain"><span>后代选择器</span></a></li>
+<li><a href="#frag_find_nested"><span>嵌套选择</span></a></li>
+<li><a href="#frag_find_attr"><span>属性选择器</span></a></li>
+<li><a href="#frag_find_textcomment"><span>获取HTML注释块 </span></a></li>
+</ul>
+<div id="frag_find_basic">
+<div class="code"> <span class="comment">// 查找所有的 <strong>a链接</strong>, 返回一个<strong>DOM元素对象数组</strong></span><br>
+$ret = $html-&gt;find(<span class="var">'<strong>a</strong>'</span>);<br>
+<br>
+<span class="comment">// 通过索引获取数组中指定的元素DOM对象，第二个参数是DOM对象数组的索引，从0开始。如果不存在返回null</span><br>
+$ret = $html-&gt;find(<span class="var">'<strong>a</strong>', <strong>0</strong></span>);<br>
+<br>
+<span class="comment">// 通过索引-1获取数组中的最后的一个元素DOM对象，如果不存在返回null</span><br>
+$ret = $html-&gt;find(<span class="var">'<strong>a</strong>', <strong>-1</strong></span>);        <br>
+<br>
+<span class="comment">// 查找所有具有id属性的div</span><br>
+$ret = $html-&gt;find(<span class="var">'<strong>div[id]</strong>'</span>);<br>
+<br>
+<span class="comment">// 查找所有具有id=foo属性的div</span><br>
+$ret = $html-&gt;find(<span class="var">'<strong>div[id=foo]</strong>'</span>);        <br>
+</div>
+</div>
+<div id="frag_find_advanced">
+<div class="code"><span class="comment">// 查找所有<strong>id</strong>是foo的元素</span><br>
+$ret = $html-&gt;find(<span class="var">'<strong>#foo</strong>'</span>);<br>
+<br>
+<span class=comment>// 查找所有<strong>class</strong>是foo的元素</span><br>
+$ret = $html-&gt;find(<span class=var>'<strong>.foo</strong>'</span>);<br>
+<br>
+<span class="comment">//查找所有拥有<strong>id</strong>属性的元素</span><br>
+$ret = $html-&gt;find(<span class="var">'<strong>*[id]</strong>'</span>);        <br>
+<br>
+<span class="comment">// 查找所有的a链接和img图片元素 </span><br>
+$ret = $html-&gt;find(<span class="var">'<strong>a, img</strong>'</span>);        <br>
+<br>
+<span class="comment">// 查找所有拥有title属性的a链接和img图片元素 </span><br>
+$ret = $html-&gt;find(<span class="var">'<strong>a[title], img[title]</strong>'</span>);<br>
+</div>
+</div>
+<div id="frag_find_attr">
+<div class="code">
+支持下面的属性选择器:<br><br>
+<table cellpadding="1" cellspacing="1">
+<tr>
+<th width="25%">选择器</th>
+<th width="75%">描述</th>
+</tr>
+<tr>
+<td>[attribute]</td>
+<td>匹配所有拥有attribute属性的元素</td>
+</tr>
+<tr>
+<td>[!attribute]</td>
+<td>匹配所有没有attribute属性的元素</td>
+</tr>
+<tr>
+<td>[attribute=value]</td>
+<td>匹配所有attribute属性值是value的元素</td>
+</tr>
+<tr>
+<td>[attribute!=value]</td>
+<td>匹配所有attribute属性值不是value的元素</td>
+</tr>
+<tr>
+<td>[attribute^=value]</td>
+<td>匹配所有attribute属性值是value开头的元素</td>
+</tr>
+<tr>
+<td>[attribute$=value]</td>
+<td>匹配所有attribute属性值是value结尾的元素</td>
+</tr>
+<tr>
+<td>[attribute*=value]</td>
+<td>匹配所有attribute属性值包含value的元素</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="frag_find_chain">
+<div class="code"><span class="comment">// 查找ul后代中的 li 元素</span><br>
+$es = $html-&gt;find(<span class="var">'<strong>ul li</strong>'</span>);<br>
+<br>
+<span class="comment">// 查找嵌套的div元素</span><br>
+$es = $html-&gt;find(<span class="var">'<strong>div div div</strong>'</span>); <br>
+<br>
+<span class="comment">// 查找class是hello的table中的td元素 </span><br>
+$es = $html-&gt;find(<span class="var">'<strong>table.hello td</strong>'</span>);<br>
+<br>
+<span class="comment">// 查找所有align=center的td元素 </span><br>
+$es = $html-&gt;find(<span class="var">''<strong>table</strong><strong> td[align=center]</strong>'</span>);<br>
+</div>
+</div>
+<div id="frag_find_textcomment">
+<div class="code"><span class="comment"> //获取所有的文本块</span><br>
+$es = $html-&gt;find(<span class="var">'<strong>text</strong>'</span>);<br>
+<br>
+<span class="comment">// 获取所有的HTML注释 (&lt;!--...--&gt;) 块 </span><br>
+$es = $html-&gt;find(<span class="var">'<strong>comment</strong>'</span>);<br>
+</div>
+</div>
+<div id="frag_find_nested">
+<div class="code"> <span class="comment">// 查找 ul 中的所有 li 元素</span><br>
+foreach($html-&gt;find(<span class="var">'<strong>ul</strong>'</span>) as $ul) <br>
+{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; foreach($ul-&gt;find(<span class="var">'<strong>li</strong>'</span>) as $li) <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="comment">// do something...</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+}<br>
+<br>
+<span class="comment">// 查找第一个 ul 里面的第一个 li 元素</span> <br>
+$e = $html-&gt;find(<span class="var">'<strong>ul</strong>', <strong>0</strong></span>)-&gt;find(<span class="var">'<strong>li</strong>', <strong>0</strong></span>);<br>
+</div>
+</div>
+</div>
+<a name="section_access"></a>
+<h2>怎么获取DOM元素属性?</h2>
+<a class="top" href="#top">回顶部</a>
+<div id="container_access">
+<ul>
+<li><a href="#frag_access_attr"><span>获取，设置，删除元素属性</span></a></li>
+<li><a href="#frag_access_special"><span>魔术属性</span></a></li>
+<li><a href="#frag_access_tips"><span>魔术属性高级用法</span></a></li>
+</ul>
+<div id="frag_access_attr">
+<div class="code">
+<span class="comment">// 获取属性 (如果属性是没有值的属性（比如：checked, selected等）那么返回的是true或者false）</span><br>
+$value = $e-&gt;<strong>href</strong>;<br>
+<br>
+<span class="comment">// 设置属性 (如果属性是没有值的属性（比如：checked, selected等）那么值设置为true或者false）</span><br>
+$e-&gt;<strong>href</strong> = <span class="var">'my link'</span>;<br>
+<br>
+<span class="comment">// 删除属性，只要把属性赋值null即可 </span><br>
+$e-&gt;<strong>href</strong> = <strong><span class="var">null</span></strong>;<br>
+<br>
+<span class="comment">// 判断属性是否存在</span> <br>
+if(isset($e-&gt;<strong>href</strong>)) <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo <span class="var">'href 属性存在!'</span>;<br>
+</div>
+</div>
+<div id="frag_access_special">
+<div class="code"> <span class="comment">// 例子</span><br>
+<span class="hl-var">$</span><span class="hl-code">html = </span>str_get_html<span class="hl-brackets">(</span><span class="var">&quot;&lt;div&gt;foo &lt;b&gt;bar&lt;/b&gt;&lt;/div&gt;&quot;</span><span class="hl-brackets">)</span><span class="hl-code">;</span> <br>
+$e = $html-&gt;find(<span class="var">&quot;div&quot;</span>, <span class="var">0</span>);<br>
+<br>
+echo $e-&gt;<strong>tag</strong>; <span class="comment">// 返回: &quot; <strong>div</strong>&quot;</span><br>
+echo $e-&gt;<strong>outertext</strong>; <span class="comment">// 返回: &quot; <strong>&lt;div&gt;foo &lt;b&gt;bar&lt;/b&gt;&lt;/div&gt;</strong>&quot;</span><br>
+echo $e-&gt;<strong>innertext</strong>; <span class="comment">// 返回: &quot; <strong>foo &lt;b&gt;bar&lt;/b&gt;</strong>&quot;</span><br>
+echo $e-&gt;<strong>plaintext</strong>; <span class="comment">// 返回: &quot; <strong>foo </strong><strong>bar</strong>&quot;<br>
+<br>
+</span>
+<table cellspacing="1" cellpadding="1">
+<tr bgcolor="#CCCCCC">
+<th width="25%">元素特殊属性</th>
+<th width="75%">描述</th>
+</tr>
+<tr>
+<td>$e-&gt;<strong>tag</strong></td>
+<td>获取或者设置一个元素的标签</td>
+</tr>
+<tr>
+<td>$e-&gt;<strong>outertext</strong></td>
+<td>获取或者设置一个元素的 <strong> outer HTML text </strong> </td>
+</tr>
+<tr>
+<td>$e-&gt;<strong>innertext</strong></td>
+<td>获取或者设置一个元素的 <strong>inner HTML text </strong> </td>
+</tr>
+<tr>
+<td>$e-&gt;<strong>plaintext</strong></td>
+<td>获取或者设置一个元素的 <strong>plain text </strong></td>
+</tr>
+</table>
+<strong>ps：每个DOM元素都有上面的几个魔术属性，获取是指：直接引用属性，设置是指：对属性赋值</strong><br>
+</div>
+</div>
+<div id="frag_access_tips">
+<div class="code"><span class="comment">// 提取HTML的文本内容 </span><br>
+echo <strong>$html</strong>-&gt;<strong>plaintext</strong>;<br>
+<br>
+<span class="comment">
+// 使用div包裹一个元素</span><br>
+$e-&gt;<strong>outertext</strong> = <span class="var">'&lt;div class=&quot;wrap&quot;&gt;'</span> . $e-&gt;<strong>outertext</strong> . <span class="var">'&lt;div&gt;</span>';<br>
+<br>
+<span class="comment">// 删除一个元素，只要设置outertext属性为空字符串即可</span><br>
+$e-&gt;<strong>outertext</strong> = <span class="var">''</span>;<br>
+<br>
+<span class="comment">// 追加一个元素</span><br>
+$e-&gt;<strong>outertext</strong> = $e-&gt;<strong>outertext</strong> . <span class="var">'&lt;div&gt;foo</span><span class="var">&lt;div&gt;</span>';<br>
+<br>
+<span class="comment">// 插入一个元素</span><br>
+$e-&gt;<strong>outertext</strong> = <span class="var">'&lt;div&gt;foo</span><span class="var">&lt;div&gt;</span>' . $e-&gt;<strong>outertext</strong>;<br>
+</div>
+</div>
+</div>
+<a name="section_traverse"></a>
+<h2>怎么遍历DOM树?</h2>
+<a class="top" href="#top">回顶部</a>
+<div id="container_traverse">
+<ul>
+<li><a href="#frag_traverse_background"><span>背景知识</span></a></li>
+<li><a href="#frag_traverse_traverse"><span>遍历DOM树</span></a></li>
+</ul>
+<div id="frag_traverse_background">
+<div class="code"> <span class="comment">// 如果你不熟悉 HTML DOM, 请查看 <a href="http://php.net/manual/en/book.dom.php" target="_blank"><span class="var">这里</span></a> 了解一下. </span><br>
+<br>
+<span class="comment">// 例子</span><br>
+echo $html-&gt;<strong>find</strong>(<span class="var">&quot;#div1&quot;, 0</span>)-&gt;<strong>children</strong>(<span class="var">1</span>)-&gt;<strong>children</strong>(<span class="var">1</span>)-&gt;<strong>children</strong>(<span class="var">2</span>)-&gt;<span class="var">id</span>;<br>
+<span class="comment">// 或者</span> <br>
+echo $html-&gt;<strong>getElementById</strong>(<span class="var">&quot;div1&quot;</span>)-&gt;<strong>childNodes</strong>(<span class="var">1</span>)-&gt;<strong>childNodes</strong>(<span class="var">1</span>)-&gt;<strong>childNodes</strong>(<span class="var">2</span>)-&gt;<strong>getAttribute</strong>(<span class="var">'id'</span>); </div>
+</div>
+<div id="frag_traverse_traverse">
+<div class="code">下面的方法你也可以使用 <a href="manual_api.htm#camel"><span class="var">驼峰命名法</span></a>.<br>
+<table cellspacing="1" cellpadding="1">
+<tr>
+<th> 方法 </th>
+<th> 描述</th>
+</tr>
+<tr>
+<td>
+<div class="returns">mixed</div>$e-&gt;<strong>children</strong> ( <span class="var">[int $index]</span> ) </td>
+<td>无参数时返回所有的后代元素数组，参数是具体后代元素数组的索引，如果传递了索引参数那么返回的是一个DOM对象而不是数组。</td>
+</tr>
+<tr>
+<td>
+<div class="returns">element</div>$e-&gt;<strong>parent</strong> () </td>
+<td>返回父元素 </td>
+</tr>
+<tr>
+<td>
+<div class="returns">element</div>$e-&gt;<strong>first_child</strong> () </td>
+<td>返回第一个子元素，不存在就返回null </td>
+</tr>
+<tr>
+<td>
+<div class="returns">element</div>$e-&gt;<strong>last_child</strong> () </td>
+<td>返回最后一个子元素，不存在就返回null </td>
+</tr>
+<tr>
+<td>
+<div class="returns">element</div>$e-&gt;<strong>next_sibling</strong> () </td>
+<td>返回下一个同级元素，不存在就返回null </td>
+</tr>
+<tr>
+<td>
+<div class="returns">element</div>$e-&gt;<strong>prev_sibling</strong> () </td>
+<td>返回上一个同级元素，不存在就返回null </td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<a name="section_dump"></a>
+<h2>怎么dump查看一个DOM对象内部结构?</h2>
+<a class="top" href="#top">回顶部</a>
+<div id="container_dump">
+<ul>
+<li><a href="#frag_dump_quick"><span>快速的方式</span></a></li>
+<li><a href="#frag_dump_oo"><span>面向对象的方式</span></a></li>
+</ul>
+<div id="frag_dump_oo">
+<div class="code"><span class="comment">// </span><span class="comment">把元素的内部DOM树转成字符串 </span><br>
+$str = $html-&gt;<strong>save</strong>();<br>
+<br>
+<span class="comment">// 把元素的内部DOM树转成字符串保存进一个文件</span> <br>
+$html-&gt;<strong>save</strong>(<span class="var">'result.htm'</span>);</div>
+</div>
+<div id="frag_dump_quick">
+<div class="code"><span class="comment">// </span><span class="comment">把元素的内部DOM树转成字符串 </span><br>
+$str = $html;<br>
+<br>
+<span class="comment">// 打印出来</span><br>
+echo $str; <br>
+</div>
+</div>
+</div>
+<a name="section_callback"></a>
+<h2>怎么自定义自己的解析方法来解析DOM元素?</h2>
+<a class="top" href="#top">回顶部</a>
+<div id="container_callback">
+<ul>
+<li><a href="#frag_callback"><span>回调函数</span></a></li>
+</ul>
+<div id="frag_callback">
+<div class="code"><span class="comment">// 写一个接受一个元素参数$element的函数</span><br>
+function my_callback(<span class="var">$element</span>) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// 隐藏所有的 b 标签</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ($element-&gt;tag==<span class="var">'b'</span>)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$element-&gt;outertext = '';<br>
+} <br>
+<br>
+<span class="comment">// 注册自己的回调函数，参数是函数名称字符串</span><br>
+$html-&gt;<strong>set_callback</strong>(<span class="var">'my_callback'</span>);<br>
+<br>
+<span class="comment">// 回调函数会在打印对象的时候被调用</span><br>
+echo $html;
+</div>
+</div>
+</div>
+<div><br>
+Author: S.C. Chen (me578022@gmail.com)<br>
+Original idea is from Jose Solorzano's <a href="http://php-html.sourceforge.net/">HTML Parser for PHP 4</a>. <br>
+Contributions by: Contributions by: Yousuke Kumakura, Vadim Voituk, Antcs<br>
+</div>
+</div>
+
+<script type="text/javascript" src="../static/main.js"></script>
+</body>
+</html>

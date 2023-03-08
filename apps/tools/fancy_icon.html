@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html>
+</head>
+<meta charset="UTF-8">
+<title>css图标_Wum工具箱</title>
+<style>
+	.fancy-icon {
+		position: relative;
+		display: inline-block;
+		width: 1em;
+		height: 1em;
+		font-size: 20px;
+		color: currentColor;
+	}
+
+	/* home */
+	.icon-home:before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		display: block;
+		height: 0;
+		width: 0;
+		border: .5em solid transparent;
+		border-bottom-color: currentColor;
+		border-top: 0;
+	}
+
+	.icon-home:after {
+		content: '';
+		position: absolute;
+		top: .45em;
+		left: .15em;
+		display: block;
+		height: .3em;
+		width: .3em;
+		border: .2em currentColor solid;
+		border-top-width: .25em;
+		border-bottom-width: 0;
+	}
+
+	/* search */
+	.icon-search:before,
+	.icon-search:after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		display: block;
+		height: .5em;
+	}
+
+	.icon-search:before {
+		width: .5em;
+		border: .075em currentColor solid;
+		-webkit-border-radius: 100%;
+		-moz-border-radius: 100%;
+		-o-border-radius: 100%;
+		-ms-border-radius: 100%;
+		border-radius: 100%;
+	}
+
+	.icon-search:after {
+		top: .425em;
+		left: .6em;
+		width: .175em;
+		background: currentColor;
+		transform: rotate(-45deg);
+		-webkit-transform: rotate(-45deg);
+		-moz-transform: rotate(-45deg);
+		-o-transform: rotate(-45deg);
+		-ms-transform: rotate(-45deg);
+	}
+
+	/* plus */
+	.icon-plus:before,
+	.icon-plus:after {
+		content: '';
+		position: absolute;
+		display: block;
+		background: currentColor;
+		-webkit-border-radius: .25em;
+		-moz-border-radius: .25em;
+		-o-border-radius: .25em;
+		-ms-border-radius: .25em;
+		border-radius: .25em;
+	}
+
+	.icon-plus:before {
+		top: .4em;
+		left: 0;
+		height: .2em;
+		width: 1em;
+	}
+
+	.icon-plus:after {
+		top: 0;
+		left: .4em;
+		height: 1em;
+		width: .2em;
+	}
+
+	/* minus */
+	.icon-minus:before {
+		content: '';
+		position: absolute;
+		top: .4em;
+		left: 0;
+		display: block;
+		height: .2em;
+		width: 1em;
+		background: currentColor;
+		-webkit-border-radius: .25em;
+		-moz-border-radius: .25em;
+		-o-border-radius: .25em;
+		-ms-border-radius: .25em;
+		border-radius: .25em;
+	}
+
+	/* cancel */
+	.icon-cancel:before,
+	.icon-cancel:after {
+		content: '';
+		position: absolute;
+		top: .4em;
+		left: 0;
+		display: block;
+		height: .2em;
+		width: 1em;
+		background: currentColor;
+		-webkit-border-radius: .25em;
+		-moz-border-radius: .25em;
+		-o-border-radius: .25em;
+		-ms-border-radius: .25em;
+		border-radius: .25em;
+	}
+
+	.icon-cancel:before {
+		-webkit-transform: rotate(-45deg);
+		-moz-transform: rotate(-45deg);
+		-o-transform: rotate(-45deg);
+		-ms-transform: rotate(-45deg);
+		transform: rotate(-45deg);
+	}
+
+	.icon-cancel:after {
+		-webkit-transform: rotate(45deg);
+		-moz-transform: rotate(45deg);
+		-o-transform: rotate(45deg);
+		-ms-transform: rotate(45deg);
+		transform: rotate(45deg);
+	}
+
+	/* checkmark */
+	.icon-checkmark:after,
+	.icon-checkmark:before {
+		content: '';
+		position: absolute;
+		display: block;
+		width: .15em;
+		background: currentColor;
+		-webkit-border-radius: .25em;
+		-moz-border-radius: .25em;
+		-o-border-radius: .25em;
+		-ms-border-radius: .25em;
+		border-radius: .25em;
+	}
+
+	.icon-checkmark:before {
+		top: .45em;
+		left: .2em;
+		height: .3em;
+		transform: rotate(-45deg);
+		-webkit-transform: rotate(-45deg);
+		-moz-transform: rotate(-45deg);
+		-o-transform: rotate(-45deg);
+		-ms-transform: rotate(-45deg);
+	}
+
+	.icon-checkmark:after {
+		top: .15em;
+		left: .5em;
+		height: .7em;
+		-webkit-transform: rotate(45deg);
+		-moz-transform: rotate(45deg);
+		-o-transform: rotate(45deg);
+		-ms-transform: rotate(45deg);
+		transform: rotate(45deg);
+	}
+
+	/* menu */
+	.icon-menu:before {
+		content: '';
+		position: absolute;
+		top: .125em;
+		left: 0;
+		display: block;
+		height: .15em;
+		width: 1em;
+		background: currentColor;
+		-webkit-border-radius: .1em;
+		-moz-border-radius: .1em;
+		-o-border-radius: .1em;
+		-ms-border-radius: .1em;
+		border-radius: .1em;
+		-webkit-box-shadow: 0 .3em currentColor, 0 .6em currentColor;
+		-moz-box-shadow: 0 .3em currentColor, 0 .6em currentColor;
+		-o-box-shadow: 0 .3em currentColor, 0 .6em currentColor;
+		-ms-box-shadow: 0 .3em currentColor, 0 .6em currentColor;
+		box-shadow: 0 .3em currentColor, 0 .6em currentColor;
+	}
+
+	/* download */
+	.icon-download {
+		width: .8em;
+		height: .9em;
+		margin: 0 .1em;
+		border-bottom: .1em solid currentColor;
+	}
+
+	.icon-download:before {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		display: block;
+		height: 0;
+		width: 0;
+		border: .4em solid transparent;
+		border-bottom-width: 0;
+		border-top-color: currentColor;
+	}
+
+	.icon-download:after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: .225em;
+		display: block;
+		height: .5em;
+		width: .35em;
+		background: currentColor;
+	}
+
+	/* arrow-top */
+	.icon-arrow-top {
+		height: .625em;
+		overflow: hidden;
+	}
+
+	.icon-arrow-top:before {
+		content: '';
+		height: .5em;
+		width: .5em;
+		display: block;
+		border: .125em solid currentColor;
+		border-left-width: 0;
+		border-bottom-width: 0;
+		transform: rotate(-45deg);
+		-webkit-transform: rotate(-45deg);
+		-moz-transform: rotate(-45deg);
+		-o-transform: rotate(-45deg);
+		-ms-transform: rotate(-45deg);
+		position: absolute;
+		top: .175em;
+		left: .175em;
+	}
+
+	/* arrow-bottom */
+	.icon-arrow-bottom {
+		height: .625em;
+		overflow: hidden;
+	}
+
+	.icon-arrow-bottom:before {
+		content: '';
+		height: .5em;
+		width: .5em;
+		display: block;
+		border: .125em solid currentColor;
+		border-right-width: 0;
+		border-top-width: 0;
+		transform: rotate(-45deg);
+		-webkit-transform: rotate(-45deg);
+		-moz-transform: rotate(-45deg);
+		-o-transform: rotate(-45deg);
+		-ms-transform: rotate(-45deg);
+		position: absolute;
+		bottom: .175em;
+		left: .175em;
+	}
+
+	/* arrow-left */
+	.icon-arrow-left {
+		width: .625em;
+		overflow: hidden;
+	}
+
+	.icon-arrow-left:before {
+		content: '';
+		height: .5em;
+		width: .5em;
+		display: block;
+		border: .125em solid currentColor;
+		border-right-width: 0;
+		border-bottom-width: 0;
+		transform: rotate(-45deg);
+		-webkit-transform: rotate(-45deg);
+		-moz-transform: rotate(-45deg);
+		-o-transform: rotate(-45deg);
+		-ms-transform: rotate(-45deg);
+		position: absolute;
+		top: .175em;
+		left: .175em;
+	}
+
+	/* arrow-right */
+	.icon-arrow-right {
+		overflow: hidden;
+		width: .625em;
+	}
+
+	.icon-arrow-right:before {
+		content: '';
+		height: .5em;
+		width: .5em;
+		display: block;
+		border: .125em solid currentColor;
+		border-left-width: 0;
+		border-top-width: 0;
+		transform: rotate(-45deg);
+		-webkit-transform: rotate(-45deg);
+		-moz-transform: rotate(-45deg);
+		-o-transform: rotate(-45deg);
+		-ms-transform: rotate(-45deg);
+		position: absolute;
+		top: .175em;
+		right: .175em;
+	}
+
+	/* point-top */
+	.icon-point-top {
+		overflow: hidden;
+		width: .75em;
+	}
+
+	.icon-point-top:before {
+		content: '';
+		height: .375em;
+		width: .375em;
+		display: block;
+		border: .125em solid currentColor;
+		border-left-width: 0;
+		border-bottom-width: 0;
+		transform: rotate(-45deg);
+		-webkit-transform: rotate(-45deg);
+		-moz-transform: rotate(-45deg);
+		-o-transform: rotate(-45deg);
+		-ms-transform: rotate(-45deg);
+		position: absolute;
+		top: .125em;
+		left: .125em;
+	}
+
+	.icon-point-top:after {
+		content: '';
+		height: .875em;
+		width: .15em;
+		display: block;
+		background: currentColor;
+		position: absolute;
+		top: .125em;
+		left: .3em;
+	}
+
+	/* point-bottom */
+	.icon-point-bottom {
+		overflow: hidden;
+		width: .75em;
+	}
+
+	.icon-point-bottom:before {
+		content: '';
+		height: .375em;
+		width: .375em;
+		display: block;
+		border: .125em solid currentColor;
+		border-right-width: 0;
+		border-top-width: 0;
+		transform: rotate(-45deg);
+		-webkit-transform: rotate(-45deg);
+		-moz-transform: rotate(-45deg);
+		-o-transform: rotate(-45deg);
+		-ms-transform: rotate(-45deg);
+		position: absolute;
+		bottom: .125em;
+		left: .125em;
+	}
+
+	.icon-point-bottom:after {
+		content: '';
+		height: .875em;
+		width: .15em;
+		display: block;
+		background: currentColor;
+		position: absolute;
+		top: 0;
+		left: .3em;
+	}
+
+	/* point-left */
+	.icon-point-left {
+		overflow: hidden;
+		height: .75em;
+	}
+
+	.icon-point-left:before {
+		content: '';
+		height: .375em;
+		width: .375em;
+		display: block;
+		border: .125em solid currentColor;
+		border-right-width: 0;
+		border-bottom-width: 0;
+		transform: rotate(-45deg);
+		-webkit-transform: rotate(-45deg);
+		-moz-transform: rotate(-45deg);
+		-o-transform: rotate(-45deg);
+		-ms-transform: rotate(-45deg);
+		position: absolute;
+		top: .125em;
+		left: .125em;
+	}
+
+	.icon-point-left:after {
+		content: '';
+		height: .15em;
+		width: .875em;
+		display: block;
+		background: currentColor;
+		position: absolute;
+		top: .3em;
+		left: .125em;
+	}
+
+	/* point-right */
+	.icon-point-right {
+		overflow: hidden;
+		height: .75em;
+	}
+
+	.icon-point-right:before {
+		content: '';
+		height: .375em;
+		width: .375em;
+		display: block;
+		border: .125em solid currentColor;
+		border-left-width: 0;
+		border-top-width: 0;
+		transform: rotate(-45deg);
+		-webkit-transform: rotate(-45deg);
+		-moz-transform: rotate(-45deg);
+		-o-transform: rotate(-45deg);
+		-ms-transform: rotate(-45deg);
+		position: absolute;
+		top: .125em;
+		right: .125em;
+	}
+
+	.icon-point-right:after {
+		content: '';
+		height: .15em;
+		width: .875em;
+		display: block;
+		background: currentColor;
+		position: absolute;
+		top: .3em;
+		left: 0;
+	}
+</style>
+<style>
+	html {
+		color: #000;
+		background: #FFF
+	}
+
+	body,
+	div,
+	dl,
+	dt,
+	dd,
+	ul,
+	ol,
+	li,
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	pre,
+	code,
+	form,
+	fieldset,
+	legend,
+	input,
+	textarea,
+	p,
+	blockquote,
+	th,
+	td {
+		margin: 0;
+		padding: 0
+	}
+
+	table {
+		border-collapse: collapse;
+		border-spacing: 0
+	}
+
+	fieldset,
+	img {
+		border: 0
+	}
+
+	address,
+	caption,
+	cite,
+	code,
+	dfn,
+	em,
+	strong,
+	th,
+	var {
+		font-style: normal;
+		font-weight: normal
+	}
+
+	ol,
+	ul {
+		list-style: none
+	}
+
+	caption,
+	th {
+		text-align: left
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-size: 100%;
+		font-weight: normal
+	}
+
+	q:before,
+	q:after {
+		content: ''
+	}
+
+	abbr,
+	acronym {
+		border: 0;
+		font-variant: normal
+	}
+
+	sup {
+		vertical-align: text-top
+	}
+
+	sub {
+		vertical-align: text-bottom
+	}
+
+	input,
+	textarea,
+	select {
+		font-family: inherit;
+		font-size: inherit;
+		font-weight: inherit;
+		*font-size: 100%
+	}
+
+	legend {
+		color: #000
+	}
+
+	#yui3-css-stamp.cssreset {
+		display: none
+	}
+
+	body {
+		font-family: "Microsoft Yahei", Arial, Helvetica;
+	}
+
+	.container {
+		width: 1000px;
+		padding-top: 50px;
+		margin: 0 auto;
+	}
+
+	.outer {
+		margin-bottom: 40px;
+	}
+
+	.desc {
+		border: 1px dashed #ccc;
+		padding: 10px;
+		line-height: 30px;
+	}
+
+	ul {
+		overflow: hidden;
+	}
+
+	li {
+		float: left;
+		width: 20%;
+		height: 100px;
+		margin-bottom: 10px;
+		text-align: center;
+	}
+
+	li span {
+		display: block;
+	}
+</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="outer">
+			<ul>
+				<li>
+					<i class="fancy-icon icon-home"></i>
+					<span>icon-home</span>
+				</li>
+				<li>
+					<i class="fancy-icon icon-search"></i>
+					<span>icon-search</span>
+				</li>
+				<li>
+					<i class="fancy-icon icon-plus"></i>
+					<span>icon-plus</span>
+				</li>
+				<li>
+					<i class="fancy-icon icon-minus"></i>
+					<span>icon-minus</span>
+				</li>
+				<li>
+					<i class="fancy-icon icon-cancel"></i>
+					<span>icon-cancel</span>
+				</li>
+				<li>
+					<i class="fancy-icon icon-checkmark"></i>
+					<span>icon-checkmark</span>
+				</li>
+				<li>
+					<i class="fancy-icon icon-menu"></i>
+					<span>icon-menu</span>
+				</li>
+				<li>
+					<i class="fancy-icon icon-download"></i>
+					<span>icon-download</span>
+				</li>
+				<li>
+					<i class="fancy-icon icon-arrow-top"></i>
+					<span>icon-arrow-top</span>
+				</li>
+				<li>
+					<i class="fancy-icon icon-arrow-bottom"></i>
+					<span>icon-arrow-bottom</span>
+				</li>
+				<li>
+					<i class="fancy-icon icon-arrow-left"></i>
+					<span>icon-arrow-left</span>
+				</li>
+				<li>
+					<i class="fancy-icon icon-arrow-right"></i>
+					<span>icon-arrow-right</span>
+				</li>
+				<li>
+					<i class="fancy-icon icon-point-top"></i>
+					<span>icon-point-top</span>
+				</li>
+				<li>
+					<i class="fancy-icon icon-point-bottom"></i>
+					<span>icon-point-bottom</span>
+				</li>
+				<li>
+					<i class="fancy-icon icon-point-left"></i>
+					<span>icon-point-left</span>
+				</li>
+				<li>
+					<i class="fancy-icon icon-point-right"></i>
+					<span>icon-point-right</span>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div style="text-align:center;">
+		<p><a href="/" target="_blank">返回首页</a></p>
+		<p>Live in Wum, Powered by <a href="http://passer-by.com">passer-by.com</a></p>
+	</div>
+	<script type="text/javascript" src="../static/main.js"></script>
+</body>
+
+</html>
