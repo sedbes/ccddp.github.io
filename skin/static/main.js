@@ -46,7 +46,7 @@ function gg_fandeng() {
 function tongji() {
     window._hmt = window._hmt || [];
     var hm = document.createElement("script");
-    hm.src = "https://hm.baidu.com/hm.js?7dfbd278984a2fe97d0e11a4791fe4b5";
+    hm.src = "https://hm.baidu.com/hm.js?a74fe2c8c082ae16515b24a8309e5bda";
     var s = document.getElementsByTagName("body")[0];
     s.appendChild(hm, s);
 }
