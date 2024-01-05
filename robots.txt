@@ -1,7 +1,4 @@
 User-agent: *
-Allow: /
+Disallow: /
 Disallow: /CNAME
 Disallow: /README.md
-
-Sitemap: http://www.sedbes.top/sitemap.xml
-Sitemap: http://www.sedbes.top/sitemap.txt
